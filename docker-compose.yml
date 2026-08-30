@@ -1,0 +1,59 @@
+version: "3.9"
+
+# Single-host composition for conventional Docker environments.
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: aether
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}
+      POSTGRES_DB: aether
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aether"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  redis:
+    image: redis:7
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    environment:
+      DATABASE_URL: postgresql+asyncpg://aether:${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}@postgres:5432/aether
+      SECRET_KEY: ${SECRET_KEY:?set SECRET_KEY}
+      CORS_ORIGINS: ${CORS_ORIGINS:-*}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "8123:8123"
+    command: uvicorn aether_api.main:app --host 0.0.0.0 --port 8123
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      args:
+        API_PROXY_TARGET: http://api:8123
+    environment:
+      API_PROXY_TARGET: http://api:8123
+    depends_on:
+      - api
+    ports:
+      - "3000:3000"
+
+volumes:
+  pgdata:

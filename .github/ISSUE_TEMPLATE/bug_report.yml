@@ -1,0 +1,29 @@
+name: Bug report
+description: Report reproducible product behavior without including private data.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Describe the problem and expected behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Provide minimal steps using mock or redacted data.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Versions and deployment type. Do not include credentials, private URLs, prompts, or files.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Redacted logs
+      description: Remove tokens, account identifiers, endpoints, prompts, and file contents.

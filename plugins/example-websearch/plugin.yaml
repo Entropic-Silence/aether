@@ -1,0 +1,11 @@
+api_version: 1
+id: aether.example-websearch
+name: Example Web Search
+version: 0.1.0
+description: Example plugin manifest declaring a search capability.
+entrypoint: index.py
+permissions:
+  - network:api.search.example
+capabilities:
+  - search
+dependencies: []

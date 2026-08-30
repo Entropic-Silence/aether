@@ -1,0 +1,14 @@
+{
+  "name": "aether",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Capability-driven, model-agnostic AI web platform",
+  "scripts": {
+    "dev": "bash scripts/dev.sh",
+    "check-env": "bash scripts/check_env.sh",
+    "api:test": "cd apps/api && python3 -m pytest -q",
+    "web:typecheck": "cd apps/web && tsc --noEmit",
+    "web:build": "cd apps/web && next build",
+    "secrets:check": "python3 scripts/check_secrets.py"
+  }
+}

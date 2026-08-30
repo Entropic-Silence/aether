@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.ruff_cache/
+.mypy_cache/
+
+# Node
+node_modules/
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+npm-debug.log*
+
+# Env / secrets
+.env
+.env.local
+.env.*.local
+*.local
+*.pem
+*.key
+*.p12
+credentials.json
+secrets.json
+
+# Test artifacts
+apps/api/tests/test.db
+.coverage
+htmlcov/
+.pytest_cache/
+test-results/
+playwright-report/
+apps/web/e2e/.auth/
+
+# Standalone build output
+apps/web/.next/standalone/
+
+# OS
+.DS_Store
+
+# Runtime data (object storage, sandbox workspaces)
+data/
+apps/data/
+backups/
+*.dump
+*.tar.gz
+
+# Editor / local tooling
+.idea/
+.vscode/
+.codex/
+.opencode/
+.qoder/
