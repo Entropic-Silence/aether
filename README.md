@@ -72,7 +72,7 @@ No NVIDIA-specific runtime is required. Accelerator access is isolated behind th
 ## Quick start
 
 ```bash
-git clone <your-repository-url> aether
+git clone https://github.com/Entropic-Silence/aether.git aether
 cd aether
 
 cp .env.example .env
